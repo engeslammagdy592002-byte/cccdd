@@ -123,7 +123,9 @@ export const UserDashboard = ({ userType, username }: UserDashboardProps) => {
   return (
     <div className="space-y-6 animate-fade-in">
       <div className="text-center">
-        <h2 className="text-3xl font-bold mb-2">مرحباً {username}</h2>
+        <h2 className="text-3xl font-bold mb-2">
+          مرحباً {userType === "single" && customers.length > 0 ? customers[0].customer_name : username}
+        </h2>
         <p className="text-muted-foreground">
           {userType === "multiple" ? "بيانات خطوطك" : "بيانات خطك"}
         </p>
