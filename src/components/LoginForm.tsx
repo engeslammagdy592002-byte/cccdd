@@ -111,7 +111,11 @@ export const LoginForm = ({ onLogin }: LoginFormProps) => {
                 {userType === "single" ? "رقم الموبايل" : "اسم المستخدم"}
               </Label>
               <div className="relative">
-                <User className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                {userType === "single" ? (
+                  <Phone className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                ) : (
+                  <User className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                )}
                 <Input
                   id="username"
                   type="text"
@@ -124,6 +128,7 @@ export const LoginForm = ({ onLogin }: LoginFormProps) => {
               </div>
             </div>
 
+            {userType !== "single" && (
             <div className="space-y-2">
               <Label htmlFor="password">كلمة المرور</Label>
               <div className="relative">
@@ -135,20 +140,18 @@ export const LoginForm = ({ onLogin }: LoginFormProps) => {
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="أدخل كلمة المرور"
                   className="pl-10 pr-10 text-right"
-                  required={userType !== "single"}
+                  required
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className={cn(
-                    "absolute right-3 top-1/2 transform -translate-y-1/2 text-muted-foreground hover:text-foreground",
-                    userType === "single" && "hidden"
-                  )}
+                  className="absolute right-3 top-1/2 transform -translate-y-1/2 text-muted-foreground hover:text-foreground"
                 >
                   {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
                 </button>
               </div>
             </div>
+            )}
 
             <Button 
               type="submit" 
